@@ -15,7 +15,7 @@
  * @wordpress-plugin
  * Plugin Name:       Lumination Core
  * Description:       Shared infrastructure for Lumination extensions. Provides the API gateway, analytics, admin settings, MathJax rendering, and security utilities required by all Lumination feature plugins.
- * Version:           1.0.0
+ * Version:           1.1.0
  * Requires at least: 6.4
  * Requires PHP:      7.4
  * Author:            Lumination Team
@@ -32,7 +32,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 // ── Constants ────────────────────────────────────────────────────────────────
 
-define( 'LUMINATION_CORE_VERSION',      '1.0.0' );
+define( 'LUMINATION_CORE_VERSION',      '1.1.0' );
 define( 'LUMINATION_CORE_FILE',         __FILE__ );
 define( 'LUMINATION_CORE_DIR',          plugin_dir_path( __FILE__ ) );
 define( 'LUMINATION_CORE_URL',          plugin_dir_url( __FILE__ ) );
@@ -62,7 +62,7 @@ require_once LUMINATION_CORE_DIR . 'includes/class-lumination-core.php';
  * that Core is loaded, but they must not depend on the return value — use the
  * static class methods (Lumination_Core_API::request() etc.) instead.
  *
- * @since 1.0.0
+ * @since 1.1.0
  * @return Lumination_Core
  */
 function lumination_core() {

@@ -32,6 +32,7 @@ $lumination_core_options = array(
 	'lumination_primary_hover_color',
 	'lumination_button_text_color',
 	'lumination_tool_background_color',
+	'lumination_tool_text_color',
 );
 foreach ( $lumination_core_options as $lumination_core_option ) {
 	delete_option( $lumination_core_option );

@@ -67,6 +67,7 @@ class Lumination_Core_Settings {
 			'lumination_primary_hover_color',
 			'lumination_button_text_color',
 			'lumination_tool_background_color',
+			'lumination_tool_text_color',
 		);
 		foreach ( $color_options as $option_name ) {
 			register_setting(
@@ -95,7 +96,7 @@ class Lumination_Core_Settings {
 	 *
 	 * @since 1.1.0
 	 *
-	 * @param string $name Color key: 'primary', 'primary_hover', 'button_text', or 'tool_background'.
+	 * @param string $name Color key: 'primary', 'primary_hover', 'button_text', 'tool_background', or 'tool_text'.
 	 * @return string Hex color (e.g. '#ff0000') or empty string if not set.
 	 */
 	public static function get_color( $name ) {
@@ -104,6 +105,7 @@ class Lumination_Core_Settings {
 			'primary_hover'   => 'lumination_primary_hover_color',
 			'button_text'     => 'lumination_button_text_color',
 			'tool_background' => 'lumination_tool_background_color',
+			'tool_text'       => 'lumination_tool_text_color',
 		);
 
 		if ( ! isset( $map[ $name ] ) ) {
@@ -465,6 +467,22 @@ class Lumination_Core_Settings {
 									data-default-color="#ffffff"
 								/>
 								<p class="description"><?php esc_html_e( 'Background color for tool containers (Homework Helper, Chatbot panel). Leave empty to use white.', 'lumination-core' ); ?></p>
+							</td>
+						</tr>
+						<tr>
+							<th scope="row">
+								<label for="lumination_tool_text_color"><?php esc_html_e( 'Tool Text Color', 'lumination-core' ); ?></label>
+							</th>
+							<td>
+								<input
+									type="text"
+									id="lumination_tool_text_color"
+									name="lumination_tool_text_color"
+									value="<?php echo esc_attr( get_option( 'lumination_tool_text_color', '' ) ); ?>"
+									class="lumination-color-picker"
+									data-default-color="#222222"
+								/>
+								<p class="description"><?php esc_html_e( 'Text color inside tool containers. Useful when your theme has light text on a dark background. Leave empty to inherit from theme.', 'lumination-core' ); ?></p>
 							</td>
 						</tr>
 					</table>
