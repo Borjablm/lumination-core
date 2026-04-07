@@ -81,6 +81,17 @@ class Lumination_Core_Settings {
 			);
 		}
 
+		// ── Heading level setting ──
+		register_setting(
+			'lumination_appearance_settings',
+			'lumination_tool_heading_level',
+			array(
+				'type'              => 'string',
+				'sanitize_callback' => array( __CLASS__, 'sanitize_heading_level' ),
+				'default'           => 'h2',
+			)
+		);
+
 		// Let extensions register their own settings groups on the same hook.
 		do_action( 'lumination_core_settings_init' );
 	}
@@ -113,6 +124,37 @@ class Lumination_Core_Settings {
 		}
 
 		return get_option( $map[ $name ], '' );
+	}
+
+	/**
+	 * Get the default heading tag for tool titles.
+	 *
+	 * Returns 'h1' or 'h2' based on the admin setting. Extensions can
+	 * allow per-shortcode overrides via a 'heading' attribute.
+	 *
+	 * @since 1.2.0
+	 *
+	 * @param string $override Optional shortcode-level override ('h1' or 'h2'). Empty = use global default.
+	 * @return string 'h1' or 'h2'.
+	 */
+	public static function get_heading_tag( $override = '' ) {
+		if ( in_array( $override, array( 'h1', 'h2' ), true ) ) {
+			return $override;
+		}
+		$level = get_option( 'lumination_tool_heading_level', 'h2' );
+		return in_array( $level, array( 'h1', 'h2' ), true ) ? $level : 'h2';
+	}
+
+	/**
+	 * Sanitize heading level option value.
+	 *
+	 * @since 1.2.0
+	 *
+	 * @param string $value Raw input.
+	 * @return string 'h1' or 'h2'.
+	 */
+	public static function sanitize_heading_level( $value ) {
+		return in_array( $value, array( 'h1', 'h2' ), true ) ? $value : 'h2';
 	}
 
 	// -------------------------------------------------------------------------
@@ -486,7 +528,31 @@ class Lumination_Core_Settings {
 							</td>
 						</tr>
 					</table>
-					<?php submit_button( __( 'Save Colors', 'lumination-core' ) ); ?>
+					<?php submit_button( __( 'Save Appearance', 'lumination-core' ) ); ?>
+				</div>
+
+				<div class="card" style="margin-top: 20px;">
+					<h2><?php esc_html_e( 'SEO & Headings', 'lumination-core' ); ?></h2>
+					<p class="description">
+						<?php esc_html_e( 'Choose the heading level for tool titles. Use H1 if the tool is the main content of the page (no page title). Use H2 if the page already has its own title.', 'lumination-core' ); ?>
+					</p>
+					<table class="form-table" role="presentation">
+						<tr>
+							<th scope="row">
+								<label for="lumination_tool_heading_level"><?php esc_html_e( 'Tool Title Heading', 'lumination-core' ); ?></label>
+							</th>
+							<td>
+								<?php $heading_level = get_option( 'lumination_tool_heading_level', 'h2' ); ?>
+								<select id="lumination_tool_heading_level" name="lumination_tool_heading_level">
+									<option value="h1" <?php selected( $heading_level, 'h1' ); ?>>H1</option>
+									<option value="h2" <?php selected( $heading_level, 'h2' ); ?>>H2</option>
+								</select>
+								<p class="description">
+									<?php esc_html_e( 'Can be overridden per shortcode with heading="h1" or heading="h2".', 'lumination-core' ); ?>
+								</p>
+							</td>
+						</tr>
+					</table>
 				</div>
 			</form>
 		</div>
