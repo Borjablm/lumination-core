@@ -4,7 +4,7 @@ Tags: lumination, ai, core, api, analytics
 Requires at least: 6.4
 Tested up to: 6.9
 Requires PHP: 7.4
-Stable tag: 1.1.1
+Stable tag: 1.2.0
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -62,6 +62,12 @@ Your API key is stored in the WordPress options table using the standard WordPre
 Yes — see the extension development guide linked above. The public API is stable and documented.
 
 == Changelog ==
+
+= 1.2.0 =
+* Migrate the API gateway to the AI Tutor API v1 (new base URL including the /api/v1 prefix).
+* The API is now asynchronous: requests submit a job and the result is polled until complete.
+* Add Lumination_Core_API::submit() and poll() for browser-driven polling of long-running jobs (summaries, quizzes).
+* Base URL is overridable via the `lumination_core_api_base_url` filter.
 
 = 1.0.0 =
 * Initial release.

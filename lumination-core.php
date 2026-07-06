@@ -15,7 +15,7 @@
  * @wordpress-plugin
  * Plugin Name:       Lumination Core
  * Description:       Shared infrastructure for Lumination extensions. Provides the API gateway, analytics, admin settings, MathJax rendering, and security utilities required by all Lumination feature plugins.
- * Version:           1.1.1
+ * Version:           1.2.0
  * Requires at least: 6.4
  * Requires PHP:      7.4
  * Author:            Lumination Team
@@ -32,12 +32,15 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 // ── Constants ────────────────────────────────────────────────────────────────
 
-define( 'LUMINATION_CORE_VERSION',      '1.1.1' );
+define( 'LUMINATION_CORE_VERSION',      '1.2.0' );
 define( 'LUMINATION_CORE_FILE',         __FILE__ );
 define( 'LUMINATION_CORE_DIR',          plugin_dir_path( __FILE__ ) );
 define( 'LUMINATION_CORE_URL',          plugin_dir_url( __FILE__ ) );
 define( 'LUMINATION_CORE_ADMIN_SLUG',   'lumination-core' );
-define( 'LUMINATION_API_BASE_URL',      'https://ai-sv-production.lumination.ai' );
+// AI Tutor API base. Includes the /api/v1 prefix; endpoints are appended (e.g. '/tutor').
+// To move off staging later, drop the "stage." subdomain (or override via the
+// 'lumination_core_api_base_url' filter) — the rest of the path stays the same.
+define( 'LUMINATION_API_BASE_URL',      'https://stage.ai-tutor.ai/api/v1' );
 
 // ── Auto-update via GitHub releases ──────────────────────────────────────────
 
